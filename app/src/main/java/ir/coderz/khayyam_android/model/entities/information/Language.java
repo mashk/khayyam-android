@@ -1,5 +1,6 @@
 package ir.coderz.khayyam_android.model.entities.information;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,10 @@ public class Language {
     private String title;
     private String direction;
     private List<Edition> editions;
+
+    public Language() {
+        editions = new ArrayList<>();
+    }
 
     public String getLang() {
         return lang;

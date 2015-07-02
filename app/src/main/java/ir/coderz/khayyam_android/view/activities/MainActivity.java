@@ -6,11 +6,14 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.coderz.khayyam_android.R;
+import ir.coderz.khayyam_android.view.adapters.InfoAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigation;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+
+    @Bind(R.id.recycler)
+    RecyclerView recycler;
 
 
     ActionBarDrawerToggle drawerToggle;
@@ -41,6 +47,12 @@ public class MainActivity extends AppCompatActivity {
                         R.string.drawer_open,
                         R.string.drawer_close
                 );
+        drawerLayout.setDrawerListener(drawerToggle);
+        drawerToggle.syncState();
+
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        InfoAdapter infoAdapter = new InfoAdapter(this);
+        recycler.setAdapter(infoAdapter);
 
     }
 
