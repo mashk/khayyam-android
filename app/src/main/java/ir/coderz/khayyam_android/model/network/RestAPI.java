@@ -12,7 +12,7 @@ import rx.Observable;
  * Created by sajad on 6/30/15.
  */
 public interface RestAPI {
-    String END_POINT = "http://mashk.github.io";
+    String END_POINT = "http://mashk.github.io/khayyam-api/v0";
     String INFO = "/info.json";
     String POEMS = "/poems.json";
 
