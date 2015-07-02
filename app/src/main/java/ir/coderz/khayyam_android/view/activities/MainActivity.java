@@ -41,8 +41,6 @@ public class MainActivity extends AppCompatActivity {
                         R.string.drawer_open,
                         R.string.drawer_close
                 );
-        drawerLayout.setDrawerListener(drawerToggle);
-        drawerToggle.syncState();
 
     }
 
