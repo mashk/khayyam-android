@@ -13,11 +13,14 @@ public class InfoHolder extends RecyclerView.ViewHolder {
 
     TextView editorNameTextView;
 
-    public InfoHolder(View itemView) {
+    public InfoHolder(View itemView, RecyclerClickListener recyclerClickListener) {
         super(itemView);
-
         editorNameTextView = (TextView) itemView.findViewById(R.id.editor_name);
+        itemView.setOnClickListener(
+                view -> recyclerClickListener.onItemClick(getAdapterPosition())
+        );
     }
+
 
     public void setName(String name) {
         editorNameTextView.setText(name);

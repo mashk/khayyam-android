@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -67,6 +68,12 @@ public class MainActivity extends AppCompatActivity {
     private void initializeRecycler() {
         recycler.setLayoutManager(new LinearLayoutManager(this));
         infoAdapter = new InfoAdapter(this);
+        infoAdapter.setRecyclerClickListener
+                (
+                        position ->{
+                            //TODO intent new activity
+                        }
+                );
         recycler.setAdapter(infoAdapter);
     }
 

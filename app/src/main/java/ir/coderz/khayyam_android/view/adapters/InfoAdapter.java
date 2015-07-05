@@ -19,17 +19,19 @@ import ir.coderz.khayyam_android.model.entities.information.Language;
  */
 public class InfoAdapter extends RecyclerView.Adapter<InfoHolder> {
     Context context;
-    private Info info;
+//    private Info info;
     private List<Edition> edition;
+
+    RecyclerClickListener recyclerClickListener;
 
     public InfoAdapter(Context context) {
         this.context = context;
-        info = new Info();
+//        info = new Info();
         edition = new ArrayList<>();
     }
 
     public void setInfo(Info info) {
-        this.info = info;
+//        this.info = info;
         edition.clear();
         for (Language language : info.getLanguages()) {
             edition.addAll(language.getEditions());
@@ -45,7 +47,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoHolder> {
     public InfoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View itemView = inflater.inflate(R.layout.info_item, parent, false);
-        InfoHolder infoHolder = new InfoHolder(itemView);
+        InfoHolder infoHolder = new InfoHolder(itemView,recyclerClickListener);
 
         return infoHolder;
     }
@@ -59,4 +61,10 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoHolder> {
     public int getItemCount() {
         return edition.size();
     }
+
+    public void setRecyclerClickListener(RecyclerClickListener recyclerClickListener) {
+        this.recyclerClickListener = recyclerClickListener;
+    }
+
+
 }
