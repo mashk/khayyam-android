@@ -52,7 +52,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoHolder> {
 
     @Override
     public void onBindViewHolder(InfoHolder holder, int position) {
-        holder.setName(edition.get(0).getBy());
+        holder.setName(edition.get(position).getBy());
     }
 
     @Override

@@ -19,8 +19,8 @@ public class RestRepository implements Repository {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint(RestAPI.END_POINT)
                 .build();
-        if(BuildConfig.DEBUG)
-        restAdapter.setLogLevel(RestAdapter.LogLevel.FULL);
+        if (BuildConfig.DEBUG)
+            restAdapter.setLogLevel(RestAdapter.LogLevel.FULL);
         restAPI = restAdapter.create(RestAPI.class);
     }
 

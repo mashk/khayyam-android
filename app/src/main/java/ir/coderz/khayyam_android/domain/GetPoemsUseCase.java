@@ -2,6 +2,8 @@ package ir.coderz.khayyam_android.domain;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ir.coderz.khayyam_android.model.Repository;
 import ir.coderz.khayyam_android.model.entities.poem.Poem;
 import rx.Observable;
@@ -13,10 +15,11 @@ import rx.schedulers.Schedulers;
  */
 public class GetPoemsUseCase implements UseCase<List<Poem>> {
 
-    Repository repository;
-    String editor;
+    private Repository repository;
+    private String editor;
     private List<Poem> poems;
 
+    @Inject
     public GetPoemsUseCase(Repository repository, String editor) {
         this.repository = repository;
         this.editor = editor;
