@@ -2,6 +2,7 @@ package ir.coderz.khayyam_android.view.activities;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -9,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.util.Log;
 
 import javax.inject.Inject;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigation;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
     @Bind(R.id.recycler)
     RecyclerView recycler;
 
@@ -54,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void getInfo() {
         infoUseCase.execute().subscribe(
-                info -> infoAdapter.setInfo(info)
+                info -> infoAdapter.setInfo(info),
+                throwable -> Log.v("Error", throwable.getMessage())
         );
     }
 
@@ -70,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         infoAdapter = new InfoAdapter(this);
         infoAdapter.setRecyclerClickListener
                 (
-                        position ->{
+                        position -> {
                             //TODO intent new activity
                         }
                 );
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeToolbar() {
         setSupportActionBar(toolbar);
-
+        collapsingToolbar.setTitle(getString(R.string.title_activity_main));
         drawerToggle = new ActionBarDrawerToggle
                 (
                         this,

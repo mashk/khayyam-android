@@ -7,14 +7,14 @@
     android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
     android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
     android:paddingTop="@dimen/snackbar_padding_vertical"
-    android:paddingBottom="@dimen/snackbar_padding_vertical"
-    >
+    android:paddingBottom="@dimen/snackbar_padding_vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editor_name"
         tools:text="صادق هدایت"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textSize="@dimen/abc_text_size_medium_material" />
 
 </LinearLayout>
