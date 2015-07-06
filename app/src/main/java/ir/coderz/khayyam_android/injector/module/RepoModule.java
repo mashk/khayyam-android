@@ -1,7 +1,5 @@
 package ir.coderz.khayyam_android.injector.module;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import ir.coderz.khayyam_android.injector.PreActivity;

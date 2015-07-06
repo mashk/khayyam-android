@@ -1,5 +1,6 @@
 package ir.coderz.khayyam_android.view.activities;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import ir.coderz.khayyam_android.R;
+import ir.coderz.khayyam_android.Util;
 import ir.coderz.khayyam_android.domain.GetInfoUseCase;
 import ir.coderz.khayyam_android.injector.component.DaggerRepoCompnent;
 import ir.coderz.khayyam_android.injector.module.RepoModule;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeDependency() {
         DaggerRepoCompnent.builder()
                 .repoModule(new RepoModule(""))
-                .build().inject(this);
+                .build().injectMain(this);
 
     }
 
@@ -75,7 +77,10 @@ public class MainActivity extends AppCompatActivity {
         infoAdapter.setRecyclerClickListener
                 (
                         position -> {
-                            //TODO intent new activity
+                            Intent intent = new Intent(this, PoemListActivity.class);
+                            intent.putExtra(Util.EDITOR_NAME, infoAdapter.getEditorName(position));
+                            intent.putExtra(Util.EDITOR_URL, infoAdapter.getEditorPath(position));
+                            startActivity(intent);
                         }
                 );
         recycler.setAdapter(infoAdapter);

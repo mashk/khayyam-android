@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
+    android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
+    android:paddingTop="@dimen/snackbar_padding_vertical"
+    android:paddingBottom="@dimen/snackbar_padding_vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/poem_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="هرچند که رنگ و روی زیباست مرا" />
+
+</LinearLayout>

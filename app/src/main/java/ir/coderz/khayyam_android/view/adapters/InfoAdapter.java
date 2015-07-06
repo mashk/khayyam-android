@@ -42,6 +42,9 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoHolder> {
     public String getEditorPath(int position) {
         return edition.get(position).getUrl();
     }
+    public String getEditorName(int position) {
+        return edition.get(position).getBy();
+    }
 
     @Override
     public InfoHolder onCreateViewHolder(ViewGroup parent, int viewType) {
