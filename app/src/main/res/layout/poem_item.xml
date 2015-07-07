@@ -4,16 +4,25 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/abc_list_item_padding_horizontal_material"
     android:paddingRight="@dimen/abc_list_item_padding_horizontal_material"
-    android:paddingTop="@dimen/snackbar_padding_vertical"
-    android:paddingBottom="@dimen/snackbar_padding_vertical"
+    android:layout_marginBottom="@dimen/abc_button_inset_vertical_material"
+    android:layout_marginTop="@dimen/abc_button_inset_vertical_material"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/poem_item"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        tools:text="هرچند که رنگ و روی زیباست مرا" />
+        card_view:cardCornerRadius="2dp">
 
+        <TextView
+            android:id="@+id/poem_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            tools:text="هرچند که رنگ و روی زیباست مرا" />
+    </android.support.v7.widget.CardView>
 </LinearLayout>
