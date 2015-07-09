@@ -1,9 +1,12 @@
 package ir.coderz.khayyam_android.domain;
 
+import com.google.gson.Gson;
+
 import javax.inject.Inject;
 
 import ir.coderz.khayyam_android.model.Repository;
 import ir.coderz.khayyam_android.model.entities.information.Info;
+import ir.coderz.khayyam_android.model.local.FileOperator;
 import ir.coderz.khayyam_android.model.network.RestRepository;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -15,11 +18,13 @@ import rx.schedulers.Schedulers;
 public class GetInfoUseCase implements UseCase<Info> {
 
     private Repository repository;
+    private FileOperator fileOperator;
     Info info;
 
     @Inject
-    public GetInfoUseCase(Repository repository) {
+    public GetInfoUseCase(Repository repository,FileOperator fileOperator) {
         this.repository = repository;
+        this.fileOperator = fileOperator;
     }
 
     @Override
@@ -29,6 +34,13 @@ public class GetInfoUseCase implements UseCase<Info> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(
                         info -> this.info = info
-                );
+                ).doOnCompleted
+                        (
+                                () -> {
+                                    if(repository instanceof RestRepository) {
+                                        fileOperator.save("info", new Gson().toJson(info));
+                                    }
+                                }
+                        );
     }
 }

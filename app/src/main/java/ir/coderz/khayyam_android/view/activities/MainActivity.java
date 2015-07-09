@@ -24,6 +24,7 @@ import ir.coderz.khayyam_android.domain.GetInfoUseCase;
 import ir.coderz.khayyam_android.injector.component.DaggerRepoCompnent;
 import ir.coderz.khayyam_android.injector.module.RepoModule;
 import ir.coderz.khayyam_android.model.Preference;
+import ir.coderz.khayyam_android.model.local.FileOperator;
 import ir.coderz.khayyam_android.view.adapters.InfoAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
     private void initializeDependency() {
         KhayyamApp khayyamApp = (KhayyamApp) getApplication();
         DaggerRepoCompnent.builder()
-                .repoModule(new RepoModule(""))
+                .repoModule(new RepoModule("info",new FileOperator(this)))
                 .appComponent(khayyamApp.getAppComponent())
                 .build().injectMain(this);
 

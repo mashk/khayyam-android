@@ -1,11 +1,15 @@
 package ir.coderz.khayyam_android.domain;
 
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import javax.inject.Inject;
 
 import ir.coderz.khayyam_android.model.Repository;
 import ir.coderz.khayyam_android.model.entities.poem.Poem;
+import ir.coderz.khayyam_android.model.local.FileOperator;
+import ir.coderz.khayyam_android.model.network.RestRepository;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -16,12 +20,14 @@ import rx.schedulers.Schedulers;
 public class GetPoemsUseCase implements UseCase<List<Poem>> {
 
     private Repository repository;
+    private FileOperator fileOperator;
     private String editor;
     private List<Poem> poems;
 
     @Inject
-    public GetPoemsUseCase(Repository repository, String editor) {
+    public GetPoemsUseCase(Repository repository, FileOperator fileOperator, String editor) {
         this.repository = repository;
+        this.fileOperator = fileOperator;
         this.editor = editor;
     }
 
@@ -32,7 +38,14 @@ public class GetPoemsUseCase implements UseCase<List<Poem>> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(
                         poems -> this.poems = poems
-                );
+                ).doOnCompleted
+                        (
+                                () -> {
+                                    if (repository instanceof RestRepository) {
+                                        fileOperator.save(editor, new Gson().toJson(poems));
+                                    }
+                                }
+                        );
 
     }
 }

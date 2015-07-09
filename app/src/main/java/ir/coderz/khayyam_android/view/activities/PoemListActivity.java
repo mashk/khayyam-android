@@ -15,11 +15,13 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import ir.coderz.khayyam_android.KhayyamApp;
 import ir.coderz.khayyam_android.R;
 import ir.coderz.khayyam_android.Util;
 import ir.coderz.khayyam_android.domain.GetPoemsUseCase;
 import ir.coderz.khayyam_android.injector.component.DaggerRepoCompnent;
 import ir.coderz.khayyam_android.injector.module.RepoModule;
+import ir.coderz.khayyam_android.model.local.FileOperator;
 import ir.coderz.khayyam_android.view.adapters.PoemsAdapter;
 
 public class PoemListActivity extends AppCompatActivity {
@@ -56,8 +58,10 @@ public class PoemListActivity extends AppCompatActivity {
     }
 
     private void initializeDependency() {
+        KhayyamApp khayyamApp = (KhayyamApp) getApplication();
         DaggerRepoCompnent.builder()
-                .repoModule(new RepoModule(getIntent().getStringExtra(Util.EDITOR_URL)))
+                .repoModule(new RepoModule(getIntent().getStringExtra(Util.EDITOR_URL),new FileOperator(this)))
+                .appComponent(khayyamApp.getAppComponent())
                 .build().injectPoemList(this);
 
     }
