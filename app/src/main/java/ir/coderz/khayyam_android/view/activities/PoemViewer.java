@@ -1,18 +1,33 @@
 package ir.coderz.khayyam_android.view.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import ir.coderz.khayyam_android.R;
+import ir.coderz.khayyam_android.Util;
+import ir.coderz.khayyam_android.model.entities.poem.Poem;
 
 public class PoemViewer extends AppCompatActivity {
+    @Bind(R.id.poem_view)
+    TextView poemView;
+    Poem poem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_viewer);
+        ButterKnife.bind(this);
+        if (getIntent().getExtras() == null) {
+            finish();
+        }
+        poem = Util.bundleToPoem(getIntent().getExtras());
+
+        poemView.setText(poem.toString());
     }
 
     @Override

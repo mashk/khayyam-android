@@ -1,5 +1,6 @@
 package ir.coderz.khayyam_android.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +65,13 @@ public class PoemListActivity extends AppCompatActivity {
     private void initializeRecycler() {
         recycler.setLayoutManager(new LinearLayoutManager(this));
         poemsAdapter = new PoemsAdapter(this);
+        poemsAdapter.setRecyclerClickListener(
+                position -> {
+                    Intent intent = new Intent(this, PoemViewer.class);
+                    intent.putExtras(Util.poemToBundle(poemsAdapter.getPoemAt(position)));
+                    startActivity(intent);
+                }
+        );
         recycler.setAdapter(poemsAdapter);
 
 

@@ -12,9 +12,13 @@ import ir.coderz.khayyam_android.R;
 public class PoemItemHolder extends RecyclerView.ViewHolder {
     private TextView poemText;
 
-    public PoemItemHolder(View itemView) {
+    public PoemItemHolder(View itemView, RecyclerClickListener recyclerClickListener) {
         super(itemView);
         poemText = (TextView) itemView.findViewById(R.id.poem_item);
+
+        itemView.setOnClickListener(
+                view -> recyclerClickListener.onItemClick(getAdapterPosition())
+        );
     }
 
     public void setPoem(String text) {

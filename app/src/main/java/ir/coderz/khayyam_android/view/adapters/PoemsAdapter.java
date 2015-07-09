@@ -21,6 +21,16 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemItemHolder> {
 
     List<Poem> poems;
 
+    RecyclerClickListener recyclerClickListener;
+
+    public Poem getPoemAt(int position){
+        return poems.get(position);
+    }
+
+    public void setRecyclerClickListener(RecyclerClickListener recyclerClickListener) {
+        this.recyclerClickListener = recyclerClickListener;
+    }
+
     public void setPoems(List<Poem> poems) {
         this.poems = poems;
         notifyDataSetChanged();
@@ -35,7 +45,7 @@ public class PoemsAdapter extends RecyclerView.Adapter<PoemItemHolder> {
     @Override
     public PoemItemHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.poem_item, parent, false);
-        PoemItemHolder poemItemHolder = new PoemItemHolder(view);
+        PoemItemHolder poemItemHolder = new PoemItemHolder(view,recyclerClickListener);
         return poemItemHolder;
     }
 

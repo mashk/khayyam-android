@@ -40,4 +40,12 @@ public class Poem {
     public void setFour(String four) {
         this.four = four;
     }
+
+    @Override
+    public String toString() {
+        return getOne() + "\n\n"
+                + getTwo() + "\n\n"
+                + getThree() + "\n\n"
+                + getFour() + "\n\n";
+    }
 }
