@@ -7,7 +7,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "ir.coderz.khayyam_android"
+        applicationId "ir.coderz.khayyam"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1

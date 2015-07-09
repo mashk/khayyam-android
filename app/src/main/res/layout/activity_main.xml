@@ -4,7 +4,7 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ir.coderz.khayyam_android.view.activities.MainActivity">
+    tools:context="ir.coderz.khayyam.view.activities.MainActivity">
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ir.coderz.khayyam_android" >
+    package="ir.coderz.khayyam" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".KhayyamApp"
+        android:name="ir.coderz.khayyam.KhayyamApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name="ir.coderz.khayyam.view.activities.MainActivity"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,20 +22,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.activities.PoemListActivity"
+            android:name="ir.coderz.khayyam.view.activities.PoemListActivity"
             android:label="@string/title_activity_poem_list"
-            android:parentActivityName=".view.activities.MainActivity" >
+            android:parentActivityName="ir.coderz.khayyam.view.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ir.coderz.khayyam_android.view.activities.MainActivity" />
+                android:value="ir.coderz.khayyam.view.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".view.activities.PoemViewer"
+            android:name="ir.coderz.khayyam.view.activities.PoemViewer"
             android:label="@string/title_activity_poem_viewer"
-            android:parentActivityName=".view.activities.PoemListActivity" >
+            android:parentActivityName="ir.coderz.khayyam.view.activities.PoemListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ir.coderz.khayyam_android.view.activities.PoemListActivity" />
+                android:value="ir.coderz.khayyam.view.activities.PoemListActivity" />
         </activity>
     </application>
 
