@@ -17,11 +17,13 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import ir.coderz.khayyam_android.KhayyamApp;
 import ir.coderz.khayyam_android.R;
 import ir.coderz.khayyam_android.Util;
 import ir.coderz.khayyam_android.domain.GetInfoUseCase;
 import ir.coderz.khayyam_android.injector.component.DaggerRepoCompnent;
 import ir.coderz.khayyam_android.injector.module.RepoModule;
+import ir.coderz.khayyam_android.model.Preference;
 import ir.coderz.khayyam_android.view.adapters.InfoAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Inject
     GetInfoUseCase infoUseCase;
+    @Inject
+    Preference preference;
 
     private ActionBarDrawerToggle drawerToggle;
     private InfoAdapter infoAdapter;
@@ -59,14 +63,18 @@ public class MainActivity extends AppCompatActivity {
 
     private void getInfo() {
         infoUseCase.execute().subscribe(
-                info -> infoAdapter.setInfo(info),
+                info -> {
+                    infoAdapter.setInfo(info);
+                },
                 throwable -> Log.v("Error", throwable.getMessage())
         );
     }
 
     private void initializeDependency() {
+        KhayyamApp khayyamApp = (KhayyamApp) getApplication();
         DaggerRepoCompnent.builder()
                 .repoModule(new RepoModule(""))
+                .appComponent(khayyamApp.getAppComponent())
                 .build().injectMain(this);
 
     }
