@@ -28,6 +28,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="ir.coderz.khayyam_android.view.activities.MainActivity" />
         </activity>
+        <activity
+            android:name=".view.activities.PoemViewer"
+            android:label="@string/title_activity_poem_viewer"
+            android:parentActivityName=".view.activities.PoemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ir.coderz.khayyam_android.view.activities.PoemListActivity" />
+        </activity>
     </application>
 
 </manifest>
