@@ -1,5 +1,7 @@
 package ir.coderz.khayyam.model.local;
 
+import android.app.Activity;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ir.coderz.khayyam.injector.HasRepoComponent;
 import ir.coderz.khayyam.model.Repository;
 import ir.coderz.khayyam.model.entities.information.Info;
 import ir.coderz.khayyam.model.entities.poem.Poem;
@@ -18,12 +21,14 @@ import rx.Observable;
  * Created by sajad on 7/9/15.
  */
 public class LocalRepository implements Repository {
-
+    @Inject
     FileOperator fileOperator;
 
-    @Inject
-    public LocalRepository(FileOperator fileOperator) {
-        this.fileOperator = fileOperator;
+
+    public LocalRepository(Activity activity) {
+        if(activity instanceof HasRepoComponent){
+            ((HasRepoComponent) activity).getComponent().inject(this);
+        }
     }
 
 

@@ -65,6 +65,5 @@ public class RestRepository implements Repository {
             return new Exception();
         }
 
-        ;
     }
 }

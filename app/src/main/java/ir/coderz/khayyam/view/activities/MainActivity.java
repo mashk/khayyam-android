@@ -21,13 +21,14 @@ import ir.coderz.khayyam.KhayyamApp;
 import ir.coderz.khayyam.R;
 import ir.coderz.khayyam.Util;
 import ir.coderz.khayyam.domain.GetInfoUseCase;
-import ir.coderz.khayyam.injector.component.DaggerRepoCompnent;
+import ir.coderz.khayyam.injector.HasRepoComponent;
+import ir.coderz.khayyam.injector.component.DaggerRepoComponent;
+import ir.coderz.khayyam.injector.component.RepoComponent;
 import ir.coderz.khayyam.injector.module.RepoModule;
 import ir.coderz.khayyam.model.Preference;
-import ir.coderz.khayyam.model.local.FileOperator;
 import ir.coderz.khayyam.view.adapters.InfoAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements HasRepoComponent<RepoComponent> {
 
 
     @Bind(R.id.drawer)
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
     private InfoAdapter infoAdapter;
+    private RepoComponent repoComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void initializeDependency() {
         KhayyamApp khayyamApp = (KhayyamApp) getApplication();
-        DaggerRepoCompnent.builder()
-                .repoModule(new RepoModule("info",new FileOperator(this)))
-                .appComponent(khayyamApp.getAppComponent())
-                .build().injectMain(this);
+        repoComponent = DaggerRepoComponent.builder()
+                .repoModule(new RepoModule("info", this))
+                .appComponent(khayyamApp.getComponent())
+                .build();
+        repoComponent.injectMain(this);
 
     }
 
@@ -117,5 +120,10 @@ public class MainActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public RepoComponent getComponent() {
+        return repoComponent;
     }
 }

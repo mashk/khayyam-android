@@ -19,12 +19,13 @@ import ir.coderz.khayyam.KhayyamApp;
 import ir.coderz.khayyam.R;
 import ir.coderz.khayyam.Util;
 import ir.coderz.khayyam.domain.GetPoemsUseCase;
-import ir.coderz.khayyam.injector.component.DaggerRepoCompnent;
+import ir.coderz.khayyam.injector.HasRepoComponent;
+import ir.coderz.khayyam.injector.component.DaggerRepoComponent;
+import ir.coderz.khayyam.injector.component.RepoComponent;
 import ir.coderz.khayyam.injector.module.RepoModule;
-import ir.coderz.khayyam.model.local.FileOperator;
 import ir.coderz.khayyam.view.adapters.PoemsAdapter;
 
-public class PoemListActivity extends AppCompatActivity {
+public class PoemListActivity extends AppCompatActivity implements HasRepoComponent<RepoComponent> {
 
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
@@ -37,6 +38,7 @@ public class PoemListActivity extends AppCompatActivity {
     @Inject
     GetPoemsUseCase getPoemsUseCase;
     private PoemsAdapter poemsAdapter;
+    private RepoComponent repoComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +61,11 @@ public class PoemListActivity extends AppCompatActivity {
 
     private void initializeDependency() {
         KhayyamApp khayyamApp = (KhayyamApp) getApplication();
-        DaggerRepoCompnent.builder()
-                .repoModule(new RepoModule(getIntent().getStringExtra(Util.EDITOR_URL),new FileOperator(this)))
-                .appComponent(khayyamApp.getAppComponent())
-                .build().injectPoemList(this);
+        repoComponent = DaggerRepoComponent.builder()
+                .repoModule(new RepoModule(getIntent().getStringExtra(Util.EDITOR_URL), this))
+                .appComponent(khayyamApp.getComponent())
+                .build();
+        repoComponent.injectPoemList(this);
 
     }
 
@@ -97,5 +100,10 @@ public class PoemListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public RepoComponent getComponent() {
+        return repoComponent;
     }
 }

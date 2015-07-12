@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ir.coderz.khayyam.model.Preference;
 import ir.coderz.khayyam.model.Repository;
 import ir.coderz.khayyam.model.entities.poem.Poem;
 import ir.coderz.khayyam.model.local.FileOperator;
@@ -21,13 +22,15 @@ public class GetPoemsUseCase implements UseCase<List<Poem>> {
 
     private Repository repository;
     private FileOperator fileOperator;
+    private Preference preference;
     private String editor;
     private List<Poem> poems;
 
     @Inject
-    public GetPoemsUseCase(Repository repository, FileOperator fileOperator, String editor) {
+    public GetPoemsUseCase(Repository repository, FileOperator fileOperator, Preference preference, String editor) {
         this.repository = repository;
         this.fileOperator = fileOperator;
+        this.preference = preference;
         this.editor = editor;
     }
 
@@ -43,6 +46,7 @@ public class GetPoemsUseCase implements UseCase<List<Poem>> {
                                 () -> {
                                     if (repository instanceof RestRepository) {
                                         fileOperator.save(editor, new Gson().toJson(poems));
+                                        preference.writeToPreference(editor, "true");
                                     }
                                 }
                         );

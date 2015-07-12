@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import javax.inject.Inject;
 
+import ir.coderz.khayyam.model.Preference;
 import ir.coderz.khayyam.model.Repository;
 import ir.coderz.khayyam.model.entities.information.Info;
 import ir.coderz.khayyam.model.local.FileOperator;
@@ -19,12 +20,14 @@ public class GetInfoUseCase implements UseCase<Info> {
 
     private Repository repository;
     private FileOperator fileOperator;
+    private Preference preference;
     Info info;
 
     @Inject
-    public GetInfoUseCase(Repository repository,FileOperator fileOperator) {
+    public GetInfoUseCase(Repository repository,FileOperator fileOperator,Preference preference) {
         this.repository = repository;
         this.fileOperator = fileOperator;
+        this.preference= preference;
     }
 
     @Override
@@ -37,8 +40,9 @@ public class GetInfoUseCase implements UseCase<Info> {
                 ).doOnCompleted
                         (
                                 () -> {
-                                    if(repository instanceof RestRepository) {
+                                    if (repository instanceof RestRepository) {
                                         fileOperator.save("info", new Gson().toJson(info));
+                                        preference.writeToPreference("info","true");
                                     }
                                 }
                         );

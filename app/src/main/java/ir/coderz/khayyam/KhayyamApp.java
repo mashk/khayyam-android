@@ -19,8 +19,8 @@ public class KhayyamApp extends Application {
                 .build();
     }
 
-    public AppComponent getAppComponent() {
+
+    public AppComponent getComponent() {
         return appComponent;
     }
-
 }
