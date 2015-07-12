@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import javax.inject.Inject;
 
@@ -33,9 +34,9 @@ public class FileOperator {
         }
     }
 
-    public String load(String file) {
+    public String load(String file) throws IOException {
         StringBuffer content = new StringBuffer("");
-        try {
+
             FileInputStream fileInputStream = context.openFileInput(file);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream,"UTF8");
             int b;
@@ -43,11 +44,7 @@ public class FileOperator {
                 content.append((char) b);
             }
             fileInputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
         return content.toString();
     }
 }

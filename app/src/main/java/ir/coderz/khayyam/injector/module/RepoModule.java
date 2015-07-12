@@ -6,6 +6,7 @@ import ir.coderz.khayyam.injector.PreActivity;
 import ir.coderz.khayyam.model.Repository;
 import ir.coderz.khayyam.model.local.FileOperator;
 import ir.coderz.khayyam.model.local.LocalRepository;
+import ir.coderz.khayyam.model.network.RestRepository;
 
 /**
  * Created by sajad on 7/5/15.
