@@ -12,7 +12,8 @@
         </menu>
     </item>
     <group android:checkableBehavior="single">
-        <item android:title="About" />
+        <item android:title="About"
+            android:id="@+id/action_about"/>
         <item android:title="Donate" />
     </group>
 

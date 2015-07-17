@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item android:title="ABOUT KHOSP">
+            <menu>
+                <item
+                    android:title="Khayyam open source project"
+                    android:id="@+id/go_to_mask" />
+                <item
+                    android:title="Khayyam-android project"
+                    android:id="@+id/go_to_khayyam_android" />
+                <item
+                    android:title="khayyam-android licence"
+                    android:id="@+id/go_to_khayyam_licence" />
+            </menu>
+        </item>
+
+        <item
+            android:title="Open Source Licence"
+            android:id="@+id/go_to_open_source_licence" />
+
+    </group>
+    <group>
+        <item android:title="Development">
+            <menu>
+                <item
+                    android:title="Contributors"
+                    android:id="@+id/go_to_contributors" />
+                <item
+                    android:title="Coderz.ir"
+                    android:id="@+id/go_to_coderz" />
+            </menu>
+        </item>
+    </group>
+</menu>

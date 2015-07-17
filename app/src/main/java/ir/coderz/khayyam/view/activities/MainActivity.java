@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import javax.inject.Inject;
 
@@ -28,7 +29,7 @@ import ir.coderz.khayyam.injector.module.RepoModule;
 import ir.coderz.khayyam.model.Preference;
 import ir.coderz.khayyam.view.adapters.InfoAdapter;
 
-public class MainActivity extends AppCompatActivity implements HasRepoComponent<RepoComponent> {
+public class MainActivity extends AppCompatActivity implements HasRepoComponent<RepoComponent>, NavigationView.OnNavigationItemSelectedListener {
 
 
     @Bind(R.id.drawer)
@@ -111,10 +112,22 @@ public class MainActivity extends AppCompatActivity implements HasRepoComponent<
                 );
         drawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
+        navigation.setNavigationItemSelectedListener(this);
 
     }
 
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.action_about: {
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
