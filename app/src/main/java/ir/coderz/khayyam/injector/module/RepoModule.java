@@ -26,7 +26,7 @@ public class RepoModule {
 
     }
 
-    @PreActivity
+//    @PreActivity
     @Provides
     Repository repository() {
         Preference preference = new Preference(activity);

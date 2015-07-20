@@ -3,9 +3,11 @@ package ir.coderz.khayyam.view.activities;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -36,10 +38,14 @@ public class MainActivity extends AppCompatActivity implements HasRepoComponent<
     DrawerLayout drawerLayout;
     @Bind(R.id.navigation)
     NavigationView navigation;
+    @Bind(R.id.appbar)
+    AppBarLayout appBarLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbar;
+    @Bind(R.id.refresher)
+    SwipeRefreshLayout refreshLayout;
     @Bind(R.id.recycler)
     RecyclerView recycler;
 
@@ -61,16 +67,51 @@ public class MainActivity extends AppCompatActivity implements HasRepoComponent<
         initializeToolbar();
         initializeRecycler();
         initializeDependency();
+        initializeRefresher();
         getInfo();
 
     }
 
+    AppBarLayout.OnOffsetChangedListener onAppBarOffsetChangeListener
+            = (appBarLayout1, i) ->
+            refreshLayout.setEnabled(i == 0);
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        appBarLayout.addOnOffsetChangedListener(onAppBarOffsetChangeListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        appBarLayout.removeOnOffsetChangedListener(onAppBarOffsetChangeListener);
+    }
+
     private void getInfo() {
+        refreshLayout.measure(1,1);
+        refreshLayout.setRefreshing(true);
         infoUseCase.execute().subscribe(
                 info -> {
                     infoAdapter.setInfo(info);
                 },
-                throwable -> Log.v("Error", throwable.getMessage())
+                throwable ->
+                {
+                    refreshLayout.setRefreshing(false);
+                    Log.v("Error", throwable.getMessage());
+                }
+                ,
+                () -> refreshLayout.setRefreshing(false)
+        );
+    }
+
+    private void initializeRefresher() {
+        refreshLayout.setOnRefreshListener(
+                () -> {
+                    preference.resetAll();
+                    repoComponent.injectMain(this);
+                    getInfo();
+                }
         );
     }
 

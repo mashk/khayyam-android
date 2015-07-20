@@ -31,4 +31,18 @@ public class Preference {
         SharedPreferences preferences = getSharedPreference();
         return preferences.getString(key, "");
     }
+
+    public void resetAll() {
+        SharedPreferences preferences = getSharedPreference();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    public void resetField(String field) {
+        SharedPreferences preferences = getSharedPreference();
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(field);
+        editor.commit();
+    }
 }
