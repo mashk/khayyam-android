@@ -2,6 +2,7 @@ package ir.coderz.khayyam.domain;
 
 import com.google.gson.Gson;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -46,7 +47,8 @@ public class GetPoemsUseCase implements UseCase<List<Poem>> {
                                 () -> {
                                     if (repository instanceof RestRepository) {
                                         fileOperator.save(editor, new Gson().toJson(poems));
-                                        preference.writeToPreference(editor, "true");
+                                        Calendar calendar = Calendar.getInstance();
+                                        preference.writeToPreference(editor, calendar.getTimeInMillis() + "");
                                     }
                                 }
                         );

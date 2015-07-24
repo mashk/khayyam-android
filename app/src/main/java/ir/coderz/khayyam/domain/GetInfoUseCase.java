@@ -2,6 +2,8 @@ package ir.coderz.khayyam.domain;
 
 import com.google.gson.Gson;
 
+import java.util.Calendar;
+
 import javax.inject.Inject;
 
 import ir.coderz.khayyam.model.Preference;
@@ -24,10 +26,10 @@ public class GetInfoUseCase implements UseCase<Info> {
     Info info;
 
     @Inject
-    public GetInfoUseCase(Repository repository,FileOperator fileOperator,Preference preference) {
+    public GetInfoUseCase(Repository repository, FileOperator fileOperator, Preference preference) {
         this.repository = repository;
         this.fileOperator = fileOperator;
-        this.preference= preference;
+        this.preference = preference;
     }
 
     @Override
@@ -42,7 +44,8 @@ public class GetInfoUseCase implements UseCase<Info> {
                                 () -> {
                                     if (repository instanceof RestRepository) {
                                         fileOperator.save("info", new Gson().toJson(info));
-                                        preference.writeToPreference("info","true");
+                                        Calendar calendar = Calendar.getInstance();
+                                        preference.writeToPreference("info", calendar.getTimeInMillis() + "");
                                     }
                                 }
                         );
