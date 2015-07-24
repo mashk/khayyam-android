@@ -1,7 +1,9 @@
 package ir.coderz.khayyam.view.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -13,6 +15,8 @@ import ir.coderz.khayyam.Util;
 import ir.coderz.khayyam.model.entities.poem.Poem;
 
 public class PoemViewer extends AppCompatActivity {
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     @Bind(R.id.poem_view)
     TextView poemView;
     Poem poem;
@@ -22,6 +26,8 @@ public class PoemViewer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_viewer);
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
         if (getIntent().getExtras() == null) {
             finish();
         }
@@ -39,14 +45,15 @@ public class PoemViewer extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_share: {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, poem.toString());
+                intent.setType("text/plain");
+                startActivity(Intent.createChooser(intent, getString(R.string.share_with)));
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);

@@ -4,7 +4,7 @@
     tools:context="ir.coderz.khayyam.view.activities.MainActivity">
     <item
         android:id="@+id/action_bookmarks"
-        android:title="@string/action_settings"
+        android:title="@string/action_bookmarks"
         android:orderInCategory="100"
         android:visible="false"
         app:showAsAction="never" />
