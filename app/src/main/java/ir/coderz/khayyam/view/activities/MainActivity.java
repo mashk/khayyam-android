@@ -15,6 +15,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements HasRepoComponent<
     SwipeRefreshLayout refreshLayout;
     @Bind(R.id.recycler)
     RecyclerView recycler;
+    @Bind(R.id.background)
+    ImageView backgroundView;
 
     @Inject
     GetInfoUseCase infoUseCase;
@@ -154,6 +159,13 @@ public class MainActivity extends AppCompatActivity implements HasRepoComponent<
         drawerLayout.setDrawerListener(drawerToggle);
         drawerToggle.syncState();
         navigation.setNavigationItemSelectedListener(this);
+
+        Picasso
+                .with(this)
+                .load("file:///android_asset/wallpaper.jpg")
+                .fit()
+                .centerCrop()
+                .into(backgroundView);
 
     }
 

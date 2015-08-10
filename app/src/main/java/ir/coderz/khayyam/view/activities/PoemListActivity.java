@@ -12,6 +12,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -36,6 +39,8 @@ public class PoemListActivity extends AppCompatActivity implements HasRepoCompon
     AppBarLayout appBarLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    @Bind(R.id.background)
+    ImageView backgroundView;
     @Bind(R.id.refresher)
     SwipeRefreshLayout refreshLayout;
     @Bind(R.id.recycler)
@@ -133,6 +138,13 @@ public class PoemListActivity extends AppCompatActivity implements HasRepoCompon
         setSupportActionBar(toolbar);
         collapsingToolbar.setTitle(getIntent().getStringExtra(Util.EDITOR_NAME));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Picasso
+                .with(this)
+                .load("file:///android_asset/wallpaper.jpg")
+                .fit()
+                .centerCrop()
+                .into(backgroundView);
     }
 
     @Override

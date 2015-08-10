@@ -4,4 +4,6 @@
     <color name="primary">#60a6b8</color>
     <color name="primary_dark">#29464e</color>
     <color name="accent">#f06060</color>
+
+    <color name="white_trans">#e3ffffff</color>
 </resources>

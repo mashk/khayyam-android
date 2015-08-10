@@ -6,7 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -19,6 +22,8 @@ public class PoemViewer extends AppCompatActivity {
     Toolbar toolbar;
     @Bind(R.id.poem_view)
     TextView poemView;
+    @Bind(R.id.background)
+    ImageView backgroundView;
     Poem poem;
 
     @Override
@@ -34,6 +39,14 @@ public class PoemViewer extends AppCompatActivity {
         poem = Util.bundleToPoem(getIntent().getExtras());
 
         poemView.setText(poem.toString());
+
+
+        Picasso
+                .with(this)
+                .load("file:///android_asset/wallpaper.jpg")
+                .fit()
+                .centerCrop()
+                .into(backgroundView);
     }
 
     @Override
