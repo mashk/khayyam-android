@@ -1,20 +1,18 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="ir.coderz.khayyam.view.activities.PoemViewer">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary" />
+
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center">
+        <!--TODO
+        Use percent frame layout -->
 
         <ImageView
             android:id="@+id/background"
@@ -38,10 +36,17 @@
                 android:ellipsize="marquee"
                 android:gravity="center"
                 android:textSize="@dimen/poem_view"
-
+                android:textIsSelectable="true"
                 tools:text="هرچند که رنگ و روی زیباست مرا\n\nچون لاله رخ و چو سَرْو بالاست مرا،\n\nمعلوم نشد که در طَرَبخانهٔ خاک\n\nنقّاشِ ازل بهرِ چه آراست مرا؟" />
         </FrameLayout>
     </FrameLayout>
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/trans"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-
-</LinearLayout>
+</FrameLayout>

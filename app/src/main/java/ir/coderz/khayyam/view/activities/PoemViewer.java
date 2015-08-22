@@ -32,6 +32,7 @@ public class PoemViewer extends AppCompatActivity {
         setContentView(R.layout.activity_poem_viewer);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle(R.string.app_name);
 
         if (getIntent().getExtras() == null) {
             finish();
